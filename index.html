@@ -146,22 +146,43 @@
 				}
 				});
 					
-					$('#song2').click(function() {
-					var audio = document.querySelector('audio');
-					audio.src = fileNames[1];
-					toggleSong();
-					});
+				$('#song2').click(function() {
+				var audio = document.querySelector('audio');
+				var  currentSong = audio.src;
+				if(currentSong.search(fileNames[1]) != -1)
+				{
+				toggleSong();
+				}
+				else {
+		    	audio.src = fileNames[1];
+				toggleSong();
+				}
+				});
 
-					$('#song3').click(function() {
-					var audio = document.querySelector('audio');
-					audio.src = fileNames[2];
-					toggleSong();
-					});
+				$('#song3').click(function() {
+				var audio = document.querySelector('audio');
+				var  currentSong = audio.src;
+				if(currentSong.search(fileNames[2]) != -1)
+				{
+				toggleSong();
+				}
+				else {
+				audio.src = fileNames[2];
+				toggleSong();
+				}
+				});
 
-					$('#song4').click(function() {
-					var audio = document.querySelector('audio');
-					audio.src = fileNames[3];
-					toggleSong();
+				$('#song4').click(function() {
+				var audio = document.querySelector('audio');
+				var  currentSong = audio.src;
+				if(currentSong.search(fileNames[3]) != -1)
+				{
+				toggleSong();
+				}
+				else {
+				audio.src = fileNames[3];
+				toggleSong();
+				}
 					});
 
 
