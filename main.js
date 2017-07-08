@@ -47,6 +47,10 @@ function updateCurrentTime() {
   }
 
 
+  
+  
+
+
   function addSongNameClickEvent(songName,position) {
         var id = '#song' + position;
         $(id).click(function() {
@@ -63,8 +67,9 @@ function updateCurrentTime() {
         });
     }
 
+	
   window.onload = function() {
-	console.log(document.querySelector);
+	//console.log(document.querySelector);
   //  var songName1 = 'Tamma Song';
   //  var songName2 = 'Humma Song';
   // var songName3 = 'Nashe Si Chadh Gayi';
