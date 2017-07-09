@@ -62,10 +62,16 @@ function updateCurrentTime() {
 }
 
 
+  function changeCurrentNameDetails(songObj){
+    $('.current-song-image').attr('src', 'img/' + songObj.image);
+    $('.current-song-name').text(songObj.name);
+    $('.current-song-album').text(songObj.album);
+  }
 
-  function addSongNameClickEvent(songName,position) {
+
+  function addSongNameClickEvent(songObj,position) {
         var id = '#song' + position;
-
+        var songName = songObj.fileName;
         $(id).click(function() {
             var audio = document.querySelector('audio');
             var currentSong = audio.src;
@@ -76,8 +82,8 @@ function updateCurrentTime() {
             }
             else {
               audio.src = songName;
-
               toggleSong();
+                changeCurrentNameDetails(songObj);
             }
 
 
@@ -87,6 +93,8 @@ function updateCurrentTime() {
 
 
   window.onload = function() {
+
+
 	//console.log(document.querySelector);
   //  var songName1 = 'Tamma Song';
   //  var songName2 = 'Humma Song';
@@ -105,28 +113,32 @@ function updateCurrentTime() {
         'artist': ' Rihanna, Eminem',
         'album': ' Loud',
         'duration': '4:51',
-       'fileName': 'song1.mp3'
+       'fileName': 'song1.mp3',
+       'image' : 'song1.jpg'
     },
     {
         'name': 'Shape of You',
         'artist': ' Ed Sheeran',
         'album': ' ÷',
         'duration': '3:53',
-        'fileName': 'song2.mp3'
+        'fileName': 'song2.mp3',
+        'image' : 'song2.jpg'
     },
     {
         'name': 'Heart Attack',
         'artist': ' Enrique Iglesias',
         'album': 'Sex and Love',
         'duration': '2:50',
-        'fileName': 'song3.mp3'
+        'fileName': 'song3.mp3',
+        'image' : 'song3.jpg'
     },
     {
         'name': ' Stereo Love',
         'artist': 'Edward Maya, Vika Jigulina',
         'album': ' The Stereo Love Show',
         'duration': '4:08',
-        'fileName': 'song4.mp3'
+        'fileName': 'song4.mp3',
+        'image' : 'song4.jpg'
     }]
   //  $('#song1 .song-name').text(songList[0]);
   //   $('#song2 .song-name').text(songList[1]);
@@ -145,6 +157,8 @@ function updateCurrentTime() {
   //      song.find('.song-album').text(albumList[i]); // Added
   //       song.find('.song-length').text(durationList[i]); // Added
   //  }
+    // always display the name and image oof the first song whenever windows load
+    changeCurrentNameDetails(songs[0]);
 
    for(var i =0; i < songs.length;i++) {
        var obj = songs[i];
@@ -154,7 +168,7 @@ function updateCurrentTime() {
        song.find('.song-artist').text(obj.artist);
        song.find('.song-album').text(obj.album);
        song.find('.song-length').text(obj.duration);
-       addSongNameClickEvent(obj.fileName,i+1);
+       addSongNameClickEvent(obj,i+1);
      }
 
     //var fileNames = ['song1.mp3','song2.mp3','song3.mp3','song4.mp3'];
