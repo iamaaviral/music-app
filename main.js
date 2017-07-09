@@ -55,37 +55,37 @@ function updateCurrentTime() {
    var value = 0;
    var audio = document.querySelector('audio');
    if (audio.currentTime > 0) {
-	 
+
       value = Math.floor((100 / audio.duration) * audio.currentTime);
    }
    progress.style.width = value + "%";
 }
-  
+
 
 
   function addSongNameClickEvent(songName,position) {
         var id = '#song' + position;
-		 
+
         $(id).click(function() {
             var audio = document.querySelector('audio');
             var currentSong = audio.src;
             if(currentSong.search(songName) != -1)
             {
-				
+
               toggleSong();
             }
             else {
               audio.src = songName;
-			 
+
               toggleSong();
             }
-			 
-		
+
+
         });
-		
+
     }
 
-	
+
   window.onload = function() {
 	//console.log(document.querySelector);
   //  var songName1 = 'Tamma Song';
@@ -226,7 +226,7 @@ function updateCurrentTime() {
   updateCurrentTime();
   },1000);
 
-  
+
   }
 
 
