@@ -67,6 +67,14 @@ h1 {
     align-items: center;
 }
 
+.player-buttons .fa {
+    margin-right: 2rem;
+}
+
+.fa.disabled {
+    color: gray;
+}
+
 .hidden {
     display: none;
 }

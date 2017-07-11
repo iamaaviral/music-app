@@ -1,4 +1,9 @@
 
+var currentSong = 1;
+var willLoop = 0;
+var willShuffle = 0;
+
+
 function toggleSong() {
   var song = document.querySelector('audio');
   if(song.paused == true) {
@@ -99,6 +104,11 @@ $("#progress-filled").css('width',percentage+"%");
 
 }
 
+// function to make the song end soon, just for checking our loop and shuffle
+function timeJump()  {
+  var song = document.querySelector('audio');
+  song.currentTime = song.duration-5;
+}
 
   window.onload = function() {
 
@@ -247,8 +257,8 @@ $("#progress-filled").css('width',percentage+"%");
   setInterval(function() {
   updateCurrentTime();
   },1000);
-  
-  
+
+
     setInterval(function() {
         updateTimer();
     }, 100);
@@ -272,6 +282,17 @@ $('.welcome-screen button').on('click', function() {
 });
 $('.play-icon').on('click', function() {
    toggleSong();
+});
+
+
+$('.fa-repeat').on('click', function() {
+    $('.fa-repeat').toggleClass('disabled');
+    willLoop = 1 - willLoop;
+})
+
+$('.fa-random').on('click',function() {
+    $('.fa-random').toggleClass('disabled')
+    willShuffle = 1 - willShuffle;
 });
 
 
