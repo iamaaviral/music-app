@@ -1,9 +1,46 @@
 
-var currentSong = 1;
+var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
 
 
+
+   // array of objects
+  var songs = [{
+        'name': ' Love The Way You Lie (Part 2) ft. Eminem',
+        'artist': ' Rihanna, Eminem',
+        'album': ' Loud',
+        'duration': '4:51',
+       'fileName': 'song1.mp3',
+       'image' : 'song1.jpg'
+    },
+    {
+        'name': 'Shape of You',
+        'artist': ' Ed Sheeran',
+        'album': ' ÷',
+        'duration': '3:53',
+        'fileName': 'song2.mp3',
+        'image' : 'song2.jpg'
+    },
+    {
+        'name': 'Heart Attack',
+        'artist': ' Enrique Iglesias',
+        'album': 'Sex and Love',
+        'duration': '2:50',
+        'fileName': 'song3.mp3',
+        'image' : 'song3.jpg'
+    },
+    {
+        'name': ' Stereo Love',
+        'artist': 'Edward Maya, Vika Jigulina',
+        'album': ' The Stereo Love Show',
+        'duration': '4:08',
+        'fileName': 'song4.mp3',
+        'image' : 'song4.jpg'
+    }]
+
+
+<!------------------------------------------------- toggle song  ---------------------------------------------------->
 function toggleSong() {
   var song = document.querySelector('audio');
   if(song.paused == true) {
@@ -37,6 +74,8 @@ ret += "" + mins + ":" + (secs < 10 ? "0" : "");
 ret += "" + secs;
 return ret;
 }
+
+
 
 
 function updateCurrentTime() {
@@ -110,6 +149,16 @@ function timeJump()  {
   song.currentTime = song.duration-5;
 }
 
+function randomExcluded(min, max, excluded) {
+    var n = Math.floor(Math.random() * (max-min) + min);
+    if (n >= excluded) n++;
+    return n;
+}
+
+
+
+/*---------------------------------------------- WINDOW ON LOAD ----------------------------------------------*/
+
   window.onload = function() {
 
 
@@ -125,39 +174,6 @@ function timeJump()  {
   // var durationList = ['2:56','3:15','2:34','2:29'];
 
 
-   // array of objects
-  var songs = [{
-        'name': ' Love The Way You Lie (Part 2) ft. Eminem',
-        'artist': ' Rihanna, Eminem',
-        'album': ' Loud',
-        'duration': '4:51',
-       'fileName': 'song1.mp3',
-       'image' : 'song1.jpg'
-    },
-    {
-        'name': 'Shape of You',
-        'artist': ' Ed Sheeran',
-        'album': ' ÷',
-        'duration': '3:53',
-        'fileName': 'song2.mp3',
-        'image' : 'song2.jpg'
-    },
-    {
-        'name': 'Heart Attack',
-        'artist': ' Enrique Iglesias',
-        'album': 'Sex and Love',
-        'duration': '2:50',
-        'fileName': 'song3.mp3',
-        'image' : 'song3.jpg'
-    },
-    {
-        'name': ' Stereo Love',
-        'artist': 'Edward Maya, Vika Jigulina',
-        'album': ' The Stereo Love Show',
-        'duration': '4:08',
-        'fileName': 'song4.mp3',
-        'image' : 'song4.jpg'
-    }]
   //  $('#song1 .song-name').text(songList[0]);
   //   $('#song2 .song-name').text(songList[1]);
   //    $('#song3 .song-name').text(songList[2]);
@@ -189,6 +205,39 @@ function timeJump()  {
        addSongNameClickEvent(obj,i+1);
      }
 
+
+     $('audio').on('ended',function() {
+          var audio = document.querySelector('audio');
+
+         if (willShuffle == 1) {
+                  var nextSongNumber = randomExcluded(1,4,currentSongNumber); // Calling our function from Stackoverflow
+                  var nextSongObj = songs[nextSongNumber-1];
+                  audio.src = nextSongObj.fileName;
+                  toggleSong();
+                  changeCurrentNameDetails(nextSongObj);
+                  currentSongNumber = nextSongNumber;
+              }
+         else if(currentSongNumber < 4) {
+                 // Play the next song
+                  var nextSongObj = songs[currentSongNumber];
+                  audio.src = nextSongObj.fileName; // Change Soure
+                  toggleSong(); // Play Next Song
+                  changeCurrentNameDetails(nextSongObj); // Update Image
+                  currentSongNumber = currentSongNumber + 1; // Change State
+             }
+           else if(willLoop == 1) {
+                          // Play first song now
+                          var nextSongObj = songs[0];
+                          audio.src = nextSongObj.fileName;
+                          toggleSong();
+                          changeCurrentNameDetails(nextSongObj);
+                          currentSongNumber =  1;
+                        }
+            else {
+                         $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+                          audio.currentTime = 0;
+                    }
+     })
     //var fileNames = ['song1.mp3','song2.mp3','song3.mp3','song4.mp3'];
     // addSongNameClickEvent(fileNames[0],1);
     // addSongNameClickEvent(fileNames[1],2);
