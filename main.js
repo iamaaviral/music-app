@@ -349,7 +349,10 @@ $('.fa-random').on('click',function() {
 
 
 $('body').on('keypress', function(event) {
-            if (event.keyCode == 32) {
-                toggleSong();
-            }
+          //  console.log(event);
+          var target = event.target;
+          if (event.keyCode == 32 && target.tagName !='INPUT')
+          {
+          toggleSong();
+          }
         });
