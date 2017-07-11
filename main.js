@@ -11,9 +11,6 @@ function toggleSong() {
   $('.play-icon').removeClass('fa-pause').addClass('fa-play');
   song.pause();
   }
-  setInterval(function() {
-			  updateProgress();
-			  },100);
   }
 
 
@@ -50,7 +47,7 @@ function updateCurrentTime() {
   }
 
 
-  function updateProgress() {
+/*  function updateProgress() {
    var progress = document.getElementById("progress-filled");
    var value = 0;
    var audio = document.querySelector('audio');
@@ -59,7 +56,7 @@ function updateCurrentTime() {
       value = Math.floor((100 / audio.duration) * audio.currentTime);
    }
    progress.style.width = value + "%";
-}
+} */
 
 
   function changeCurrentNameDetails(songObj){
@@ -90,6 +87,17 @@ function updateCurrentTime() {
         });
 
     }
+
+
+
+function updateTimer(){
+var song = document.querySelector('audio');
+var ct =song.currentTime;
+var td =song.duration;
+var percentage = (ct/td)*100;
+$("#progress-filled").css('width',percentage+"%");
+
+}
 
 
   window.onload = function() {
@@ -239,6 +247,11 @@ function updateCurrentTime() {
   setInterval(function() {
   updateCurrentTime();
   },1000);
+  
+  
+    setInterval(function() {
+        updateTimer();
+    }, 100);
 
 
   }
