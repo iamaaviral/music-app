@@ -307,6 +307,9 @@ function randomExcluded(min, max, excluded) {
   updateCurrentTime();
   },1000);
 
+  $('#songs').DataTable({
+           paging: false
+       });
 
     setInterval(function() {
         updateTimer();
