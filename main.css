@@ -96,7 +96,11 @@ table.dataTable tbody tr:hover {
 .player-buttons .fa {
     margin-right: 2rem;
 }
-
+.fa-volume-up {
+  margin-left: 2rem;
+    font-size: 1.5rem;
+    color: white;
+}
 .fa.disabled {
     color: gray;
 }

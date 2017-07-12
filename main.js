@@ -347,6 +347,27 @@ $('.fa-random').on('click',function() {
     willShuffle = 1 - willShuffle;
 });
 
+/*--------------------------------------------Audio controls----------------------- */
+
+$('.volume').on('mouseover',function(){
+    $('#vol-control').removeClass('hidden');
+
+})
+
+$('.volume').on('mouseout',function(){
+    $('#vol-control').addClass('hidden');
+})
+
+var audio = document.querySelector('audio');
+var volume = document.getElementById("vol-control");
+var mute = audio.muted
+if ( mute == true){
+  $('.mute').removeClass('fa-volume-up').addClass('fa-volume-off');
+}
+volume.addEventListener("input", function(){
+ audio.volume = this.value / 100;
+});
+
 
 $('body').on('keypress', function(event) {
           //  console.log(event);
