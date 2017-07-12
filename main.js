@@ -2,6 +2,7 @@
 var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
+	var mute = 0;
 
 
 
@@ -360,13 +361,32 @@ $('.volume').on('mouseout',function(){
 
 var audio = document.querySelector('audio');
 var volume = document.getElementById("vol-control");
-var mute = audio.muted
-if ( mute == true){
-  $('.mute').removeClass('fa-volume-up').addClass('fa-volume-off');
-}
+var mute = audio.muted;
+
 volume.addEventListener("input", function(){
  audio.volume = this.value / 100;
+ if ( audio.volume != 0){
+     $('.mute').removeClass('fa-volume-off').addClass('fa-volume-up');
+ }
+ else {
+    $('.mute').removeClass('fa-volume-up').addClass('fa-volume-off');
+ }
 });
+
+$('.mute').on('click', function(){
+  var audio = document.querySelector('audio');
+    if(mute == 0){
+    audio.muted = true;
+      $('.mute').removeClass('fa-volume-up').addClass('fa-volume-off');
+    mute = 1;
+  }
+  else {
+     audio.muted = false;
+      $('.mute').removeClass('fa-volume-off').addClass('fa-volume-up');
+     mute = 0;
+  }
+
+})
 
 
 $('body').on('keypress', function(event) {
